@@ -1,0 +1,81 @@
+* , *::after,*::before{
+    box-sizing:border-box;
+    padding: 0;
+    margin: 0;
+}
+:root{
+--spacing-medium:8px;
+--spacing-regular:16px;
+--font-small:0.5rem;
+--font-regular:1rem;
+--font-large:2rem;
+--font-xl:4rem;
+--font-semibold:600;
+}
+body{
+    margin: 0;
+    font-family: Arial;
+   
+    width:420px;
+   margin:auto;
+}
+
+h1,h2,p{
+    padding: 0;
+    margin: 0;
+}
+
+.container > aritcle , .container{
+    border: 2px solid black;
+    border-radius: var(--spacing-regular);
+    padding: var(--spacing-regular);
+    text-align: center;
+    font-weight: var(--font-semibold);
+}
+
+.container{
+    display:grid;
+    grid-template-columns : repeat(2,1fr);
+    grid-template-areas: "c-f c-f "
+                         "h-f h-f"
+                         "d-f d-f"
+                         "f-l h";
+    gap:var(--spacing-regular);
+
+                        
+}
+/*styles related to current weather app*/
+#current-forcast{
+    grid-area: c-f;
+   
+
+}
+#current-forcast > .heading{
+    font-size: var(--font-large);
+    /* font-weight:730; */
+}
+#current-forcast > .temp{
+    font-size: var(--font-xl);
+    /* font-weight:bold; */
+}
+
+#current-forcast> p{
+    font-size:var(--font-regular);
+    /* font-weight: 600; */
+}
+
+#hourly-forcast{
+    grid-area:h-f;
+}
+
+.days-forcast{
+    grid-area:d-f;
+}
+
+#feels-like{
+    grid-area:f-l;
+}
+
+#humidity{
+    grid-area:h;
+} 
