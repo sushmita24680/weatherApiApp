@@ -36,11 +36,11 @@ const fetchHourlyForcast = async({name})=>{
    
     return data.list.map( forcast =>{
        
-         const { main: { temp }, dt, dt_txt, weather: [{ icon }] } = forcast;
+        const { main: { temp ,temp_max, temp_min },  dt_txt, weather: [{ icon }] } = forcast;
     
         
       
-           return {temp,dt,dt_txt,icon};
+           return {temp_max,temp_min,temp,dt_txt,icon};
         
     
        
@@ -75,25 +75,62 @@ const  loadHourlyForcast = (data)=>{
 
 const fiveDaysForcast = (data) =>{
     console.log(data);
-    
-    for(let w in week_of_Days)
+    let dayWiseForecast = new Map();
+    let five_of_Days = week_of_Days.slice(+(new Date(data[0].dt_txt).getDay()), 6);
+    console.log("slice", five_of_Days);
+    for (let w in five_of_Days)
     {
-       let f = data.filter(d =>{ 
-            if((new Date(d.dt_txt).getDay())=== +w)
+        dayWiseForecast.set(five_of_Days[w],[...data.filter(d =>{ 
+            if((new Date(d.dt_txt).getDay()-1)=== +w)
             {
-            // minTemp(d.temp);
+     
                 return d;
             }
         
-        });
-        console.log(f);
+        })]);
+     
 
-        let minTemp =100;
-        minTemp = f.filter(t => Math.min(t.temp,minTemp));
-        console.log(minTemp);
     }
+
+
+    console.log(dayWiseForecast);
+    let miniTemp =0;
+    let maxTemp =0;
+    for([key,value] of dayWiseForecast)
+    {  
+
+
+        miniTemp = Math.min(...Array.from(value,val => val.temp_min));
+        // console.log(miniTemp);
+        maxTemp  = Math.max(...Array.from(value,val=>val.temp_max));
     
-   
+        
+        dayWiseForecast.set(key,{temp_max:miniTemp,temp_min:maxTemp,icon:value.find(v =>v.icon).icon})
+        
+        
+         
+    }
+
+
+ return dayWiseForecast;
+ 
+}
+
+const loadFiveDaysForcast = (data)=>{
+    const dayWiseForecast = fiveDaysForcast(data);
+    Array.from(dayWiseForecast).map(([days,{temp_max,temp_min,icon}],i)=>{
+        document.querySelector("#days-forcast").innerHTML+= ` 
+        <article class="days">
+          <h3>${i==0?"Today":days}</h3>
+          <img height=70px src="${getIconURL(icon)}" alt="image" />
+
+          <p class="low">${formatTemperature(temp_min)}</p>
+          <p>${formatTemperature(temp_max)}</p>
+         </article>`;
+    })
+    //    for ([key, value] of dayWiseForecast) {
+    
+    // }
 }
 
 const loadFeelsLike = ({main:{ feels_like }})=>{
@@ -114,6 +151,6 @@ const hourlyForcast = await fetchHourlyForcast(currentWeather);
     loadHourlyForcast(hourlyForcast);
     loadFeelsLike(currentWeather);
     loadHumidity(currentWeather);
-    fiveDaysForcast(hourlyForcast);
+    loadFiveDaysForcast(hourlyForcast);
 
 });
