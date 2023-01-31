@@ -13,38 +13,48 @@
   <body>
     <main class="container">
       <article id="search">
-        <input type="search" name="search" id="input-cities" list="cities"placeholder="Search-City" autofocus="on" >
+        <input autocomplete="off" type="search" name="search" id="input-cities" list="cities"placeholder="Search-City..." autofocus="on"  >
       <datalist id="cities">
 <option value="pune">pune</option>
 <option value="rohtas">rohtas</option>
       </datalist>
       </article>
       <article id="current-forcast">
-        <h1 class="heading">City Name</h1>
-        <p class="temp">temperature</p>
+        <h1 class="heading">--</h1>
+        <p class="temp">--</p>
         <p class="desc">Desc</p>
-        <p class="h-l">High Low</p>
+        <p class="h-l">High&nbsp;&nbsp;Low</p>
       </article>
       <article id="hourly-forcast">
         <h1>Hourly forcast</h1>
             <section class="hourly-forcast">
-
+              <article class="hours">
+                <p>--</p>
+               <p class="icon">--</p>
+                <p>--</p>
+              </article>
             </section>
       </article>
 
       <article class="days-forcast">
         <h1>5 days forecast</h1>
       <section id="days-forcast">
-         
+        <article class="days">
+          <h3>Today</h3>
+        <p>--</p>
+        
+          <p class="low">-- ↓</p>
+          <p>-- ↑</p>
+        </article>
       </section>
       </article>
       <article id="feels-like">
         <h1>Feels&nbsp;Like</h1>
-        <p>temp</p>
+        <p>--</p>
       </article>
       <article id="humidity">
         <h1>Humidity</h1>
-        <p>value %</p>
+        <p>-- %</p>
       </article>
     </main>
   </body>
