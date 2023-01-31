@@ -6,7 +6,7 @@
 :root{
 --screen-full-width:100%;
 --screen-width-tab:800px;
---screen-width-ph:440px;
+--screen-width-ph:650px;
 --spacing-medium:8px;
 --spacing-regular:16px;
 --font-small:0.5rem;
@@ -36,9 +36,14 @@ color:white;
 body{
     width: var(--screen-full-width);
     font-family: Arial;
-   background:rgba(2, 0, 3, 0.755);
+   background: linear-gradient(345deg,
+        rgba(8, 65, 123, 0.464)0%,
+        rgba(4, 66, 95, 0.494)80%), url('src/weather.avif');
+   background-size:cover;
+   overflow: hidden;
     min-width:var(--screen-width-ph);
-   margin:auto;
+    height: 100vh;
+   
 
 }
 
@@ -49,9 +54,12 @@ h2,p{
     padding: 0;
     margin: 0;
 }
-
+nav{
+    display: none;
+}
 .container{
     cursor: pointer;
+    margin: auto;
 }
 .container > article , .container {
     /*border: 1px solid rgb(255, 255, 255);
@@ -258,14 +266,24 @@ color:var(--body-color);
 
 @media(width>=650px){
     body{
-        margin-block:4% ;
-        min-width: var(--screen-width-tab);
-        max-width: calc(100% - 10%);
-        width: calc(100% - 10%);
-        /* height:100vh; */
+       
+        width: 100%;
+    }
+    nav{
+        display: block;
+        padding: calc(var(--spacing-medium)*0.5) calc(var(--screen-full-width)*0.01);
+        
+        margin-bottom: 1%;
+        font-size: calc( var(--font-small)*3 );
+        background: rgba(5, 40, 71, 0.772);
+        box-shadow: 1px 1px 2px 2px rgba(3, 16, 27, 0.539);
+        color:aqua;
+    }
+    nav  span{
+        color: yellow;
     }
     .container{
-    
+        width: calc(100% - 10%);
         grid-template-columns: repeat(4,1fr);
         grid-template-areas: "sch sch sch sch"
                 "c-f c-f c-f c-f "
@@ -274,5 +292,6 @@ color:var(--body-color);
 
           
     }
+
 
 }
