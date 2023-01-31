@@ -327,9 +327,15 @@ color:var(--body-color);
          #current-forcast >.img{
         display: inline-block;
         grid-area: i;
-        width: 250px;
+      
         align-self: top;
     }
+
+        #current-forcast>.img img{
+            width: 150px;
+        }
+    
+
     .desc{
         grid-area: desc;
     }

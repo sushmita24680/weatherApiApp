@@ -32,17 +32,16 @@ const loadCurrentForcast = ({ main:{ temp_max, temp, temp_min, feels_like, humid
     current.querySelector('.heading').textContent = name;
     current.querySelector('.temp').textContent = `${formatTemperature(temp)}🌡`;
     current.querySelector('.img').innerHTML = `<img class="icon" src="${getIconURL(icon)}" alt="image" />`;
-    console.log(current.querySelector('.img').innerHTML);
     current.querySelector('.desc').textContent= ` ${description}`;
     current.querySelector('.h-l').textContent =`High:${formatTemperature(temp_max)} Low:${formatTemperature(temp_min)}` 
-    console.log(temp, temp_max, temp_min, feels_like, humidity, description);
+    // console.log(temp, temp_max, temp_min, feels_like, humidity, description);
 };
 
 const fetchHourlyForcast = async({name})=>{
     const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${name}&appid=${APi_Key}&units=metric`)
 
     const data = await res.json();
-    console.log("forcast",data);
+    // console.log("forcast",data);
    
     return data.list.map( forcast =>{
        
@@ -104,7 +103,7 @@ const fiveDaysForcast = (data) =>{
             
     }
 
-    console.log(dayWiseForecast);
+    // console.log(dayWiseForecast);
     let miniTemp =0;
     let maxTemp =0;
     for([key,value] of dayWiseForecast)
@@ -181,7 +180,7 @@ const loadDataByGeoLocation = async()=>{
 
 const loadData = async()=>{
     const currentWeather = await getData(selectCity);
-    console.log(currentWeather);
+    // console.log(currentWeather);
     loadCurrentForcast(currentWeather);
     const hourlyForcast = await fetchHourlyForcast(currentWeather);
     loadHourlyForcast(hourlyForcast);
@@ -203,7 +202,7 @@ const onsearchange = async(e)=>{
     for (let { name, state, country, lat, lon } of listOfCites)
     {
     
-        console.log(name,state,country);
+        // console.log(name,state,country);
 
         options += `<option data-city-details=${JSON.stringify({lat, lon ,name})} value="${name}${state},${country}"></option>`
     }
@@ -220,7 +219,7 @@ if(options?.length)
 {
     let selectedOption = Array.from(options).find(o=>o.value === selectCityText);
     selectCity = JSON.parse(selectedOption.getAttribute('data-city-details'));
-    console.log({selectCity});
+    // console.log({selectCity});
     loadData();
 }
 }
