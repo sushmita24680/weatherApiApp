@@ -40,7 +40,7 @@ body{
         rgba(8, 65, 123, 0.464)0%,
         rgba(4, 66, 95, 0.494)80%), url('src/weather.avif');
    background-size:cover;
-   overflow: hidden;
+   overflow-x: hidden;
     min-width:var(--screen-width-ph);
     height: 100vh;
    
