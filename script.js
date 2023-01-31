@@ -31,8 +31,8 @@ const loadCurrentForcast = ({ main:{ temp_max, temp, temp_min, feels_like, humid
     const current =document.getElementById('current-forcast');
     current.querySelector('.heading').textContent = name;
     current.querySelector('.temp').textContent = `${formatTemperature(temp)}🌡`;
-    current.querySelector('.img').src =  getIconURL(icon);
-    console.log(current.querySelector('.img').src);
+    current.querySelector('.img').innerHTML = `<img class="icon" src="${getIconURL(icon)}" alt="image" />`;
+    console.log(current.querySelector('.img').innerHTML);
     current.querySelector('.desc').textContent= ` ${description}`;
     current.querySelector('.h-l').textContent =`High:${formatTemperature(temp_max)} Low:${formatTemperature(temp_min)}` 
     console.log(temp, temp_max, temp_min, feels_like, humidity, description);

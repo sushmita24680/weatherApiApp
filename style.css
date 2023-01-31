@@ -132,9 +132,9 @@ padding: calc(var(--spacing-regular)*2);
    background-color: var(--sub-body-color);
 
 }
-/* #current-forcast> .img{
+#current-forcast .img{
     display: none;
-} */
+}
 #current-forcast > .heading{
     font-size: var(--font-large);
     /* font-weight:730; */
@@ -327,7 +327,7 @@ color:var(--body-color);
          #current-forcast >.img{
         display: inline-block;
         grid-area: i;
-        width: 150px;
+        width: 250px;
         align-self: top;
     }
     .desc{
