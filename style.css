@@ -4,6 +4,8 @@
     margin: 0;
 }
 :root{
+--screen-full-width:100%;
+--screen-width-tab:800px;
 --screen-width-ph:440px;
 --spacing-medium:8px;
 --spacing-regular:16px;
@@ -19,13 +21,23 @@
 --sub-body-color2:rgba(196, 155, 155, 0.455);
 --sub-body-color3:rgba(163, 203, 235, 0.181);
 --search-box-color:rgba(159, 153, 138, 0.636);
+--scroll-thumb:#370874;
+--white-color:rgba(255, 255, 255, 0.784);
 color:white;
 }
+
+::-webkit-scrollbar{
+    width:5px;
+    background-color: var(--white-color);
+}
+::-webkit-scrollbar-thumb{
+    background-color: var(--scroll-thumb);
+}
 body{
-    margin: 0;
+    width: var(--screen-full-width);
     font-family: Arial;
    background:rgba(2, 0, 3, 0.755);
-    width:var(--screen-width-ph);
+    min-width:var(--screen-width-ph);
    margin:auto;
 
 }
@@ -78,7 +90,7 @@ padding: calc(var(--spacing-regular)*2);
     box-sizing: border-box;
     font-size: calc(var(--font-large));
     padding: 6px ;
-    width: calc(var(--screen-width-ph) - var(--font-xl)*1.3);
+    width: calc(var(--screen-full-width) - var(--font-xl)*1);
     padding-inline:20px 20px ;
     outline: none;
     border: none;
@@ -100,8 +112,8 @@ padding: calc(var(--spacing-regular)*2);
 }
 #search>input:focus-within{
     color: blue;
-    width: calc(var(--screen-width-ph) - var(--font-xl)*2);
-    background: rgba(255, 255, 255, 0.784);
+    width: calc(var(--screen-full-width) - var(--font-xl)*1);
+    background: var(--white-color);
 }
 
 
@@ -141,8 +153,8 @@ padding: calc(var(--spacing-regular)*2);
 #hourly-forcast .hourly-forcast{
         display: grid;
             grid-auto-flow: column;
-            grid-template-columns: repeat(auto-fit,1fr);
-            grid-auto-columns: auto-fit;
+            grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
+            grid-auto-columns: minmax(100px,1fr);
             overflow-x: scroll;
             gap:var(--spacing-regular);
             padding-block: 10px;
@@ -166,7 +178,7 @@ padding: calc(var(--spacing-regular)*2);
 
 .hourly-forcast::-webkit-scrollbar-thumb:horizontal {
     /* line-height: 20px; */
-    background-color: #370874;
+    background-color: var(--scroll-thumb);
     -webkit-border-radius:20px;
         -moz-border-radius:20px;
         -ms-border-radius:20px;
@@ -244,3 +256,23 @@ color:var(--body-color);
 
 }
 
+@media(width>=650px){
+    body{
+        margin-block:4% ;
+        min-width: var(--screen-width-tab);
+        max-width: calc(100% - 10%);
+        width: calc(100% - 10%);
+        /* height:100vh; */
+    }
+    .container{
+    
+        grid-template-columns: repeat(4,1fr);
+        grid-template-areas: "sch sch sch sch"
+                "c-f c-f c-f c-f "
+                "h-f h-f d-f d-f"
+                "f-l h d-f d-f";
+
+          
+    }
+
+}

@@ -168,10 +168,10 @@ func.apply(this,args);
 
 const loadDataByGeoLocation = async()=>{
     navigator.geolocation.getCurrentPosition(({coords})=>{
-        const {latitude:lat,logitude:lon} =coords;
+        const {latitude:lat,longitude:lon} =coords;
         selectCity = {lat,lon};
         loadData();
-
+        // console.log(selectCity);
     },err=>console.log(err))
 }
 
@@ -224,6 +224,7 @@ if(options?.length)
 const debounceSearch = (event)=> debounce(onsearchange(event));
 
 document.addEventListener("DOMContentLoaded",async()=>{
+    loadDataByGeoLocation();
     let inputCities = document.querySelector("#input-cities");
     inputCities.addEventListener('input',debounceSearch);
     inputCities.addEventListener('change',handleCitySelection);
