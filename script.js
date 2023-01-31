@@ -26,12 +26,13 @@ const getData = async ({ lat, lon, name: city }) => {
 }
 const formatTemperature = (temp) => `${temp?.toFixed(1)}⁰`;
 
-const loadCurrentForcast = ({ main:{ temp_max, temp, temp_min, feels_like, humidity }, name,weather:[{description,icon}] })=>{
+const loadCurrentForcast = async({ main:{ temp_max, temp, temp_min, feels_like, humidity }, name,weather:[{description,icon}] })=>{
 
     const current =document.getElementById('current-forcast');
     current.querySelector('.heading').textContent = name;
     current.querySelector('.temp').textContent = `${formatTemperature(temp)}🌡`;
-    current.querySelector('.img').src =getIconURL(icon);
+    current.querySelector('.img').src = await getIconURL(icon);
+    console.log(current.querySelector('.img').src);
     current.querySelector('.desc').textContent= ` ${description}`;
     current.querySelector('.h-l').textContent =`High:${formatTemperature(temp_max)} Low:${formatTemperature(temp_min)}` 
     console.log(temp, temp_max, temp_min, feels_like, humidity, description);
