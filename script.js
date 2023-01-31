@@ -8,6 +8,9 @@ const minTemp = (temp)=>{
 let selectCityText;
 let selectCity;
 
+const digit2Hour = (d) => { return new Date(d).toLocaleTimeString('en-us', { hour: "2-digit" }) };
+const getIconURL = (icon) => `http://openweathermap.org/img/wn/${icon}@2x.png`;
+
 const getCitiesUsingGeolocation = async(searchText)=>{
     
     const res = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchText}&limit=5&appid=${APi_Key}&units=metric`)
@@ -23,12 +26,13 @@ const getData = async ({ lat, lon, name: city }) => {
 }
 const formatTemperature = (temp) => `${temp?.toFixed(1)}⁰`;
 
-const loadCurrentForcast = ({ main:{ temp_max, temp, temp_min, feels_like, humidity }, name,weather:[{description}] })=>{
+const loadCurrentForcast = ({ main:{ temp_max, temp, temp_min, feels_like, humidity }, name,weather:[{description,icon}] })=>{
 
     const current =document.getElementById('current-forcast');
     current.querySelector('.heading').textContent = name;
-    current.querySelector('.temp').textContent = formatTemperature(temp);
-    current.querySelector('.desc').textContent= description;
+    current.querySelector('.temp').textContent = `${formatTemperature(temp)}🌡`;
+    current.querySelector('.img').src =getIconURL(icon);
+    current.querySelector('.desc').textContent= ` ${description}`;
     current.querySelector('.h-l').textContent =`High:${formatTemperature(temp_max)} Low:${formatTemperature(temp_min)}` 
     console.log(temp, temp_max, temp_min, feels_like, humidity, description);
 };
@@ -51,8 +55,7 @@ const fetchHourlyForcast = async({name})=>{
 
 
 }
-const digit2Hour = (d) => { return new Date(d).toLocaleTimeString('en-us', { hour: "2-digit" }) }; 
-const getIconURL =(icon)=>`http://openweathermap.org/img/wn/${icon}@2x.png`;
+
 const  loadHourlyForcast = (data)=>{
     const currentDate = new Date();
     // console.log(currentDate,currentDate.getHours());

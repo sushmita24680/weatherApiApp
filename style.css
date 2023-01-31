@@ -6,7 +6,7 @@
 :root{
 --screen-full-width:100%;
 --screen-width-tab:800px;
---screen-width-ph:650px;
+--screen-width-ph:440px;
 --spacing-medium:8px;
 --spacing-regular:16px;
 --font-small:0.5rem;
@@ -125,18 +125,23 @@ padding: calc(var(--spacing-regular)*2);
 }
 
 
-/*styles related to current weather app*/
+
+
 #current-forcast{
     grid-area: c-f;
    background-color: var(--sub-body-color);
 
+}
+#current-forcast> .img{
+    display: none;
 }
 #current-forcast > .heading{
     font-size: var(--font-large);
     /* font-weight:730; */
 }
 #current-forcast > .temp{
-    font-size: var(--font-xl);
+    font-size: calc(var(--font-xl)*0.8);
+    padding-bottom: 10px;
     /* font-weight:bold; */
 }
 #current-forcast .desc{
@@ -166,8 +171,8 @@ padding: calc(var(--spacing-regular)*2);
             overflow-x: scroll;
             gap:var(--spacing-regular);
             padding-block: 10px;
-          
-         
+     
+
             
 }
  /* .hourly-forcast::-webkit-scrollbar{
@@ -181,6 +186,7 @@ padding: calc(var(--spacing-regular)*2);
         -moz-border-radius: 20px;
         -ms-border-radius: 20px;
         -o-border-radius: 20px;
+        
    
 }
 
@@ -195,6 +201,7 @@ padding: calc(var(--spacing-regular)*2);
 
 .hours{
     padding-block: 5px;
+    margin-bottom: 20px;
 }
 #hourly-forcast h1{
     padding-bottom:var(--spacing-regular);
@@ -292,6 +299,39 @@ color:var(--body-color);
 
           
     }
+        /*styles related to current weather app*/
+        /* <article id="current-forcast">
+             <h1 class="heading">--</h1>
+             <p class="temp">--</p>
+             <p class="h-l">High:--&nbsp;&nbsp;Low:--</p>
+             <img class="img" src="" alt="" srcset="" />
+             <p class="desc">Description</p>
+             </article> */
+    #current-forcast{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-areas: "head t   i"
+                             "h-l t desc";
+        place-items: center;
+    }
 
+        #current-forcast> .heading{
+        grid-area: head;
+    }
+    .temp{
+        grid-area: t;
+    }
+    .h-l{
+        grid-area: h-l;
+    }
+         #current-forcast >.img{
+        display: inline-block;
+        grid-area: i;
+        width: 150px;
+        align-self: top;
+    }
+    .desc{
+        grid-area: desc;
+    }
 
 }
