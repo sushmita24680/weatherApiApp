@@ -132,9 +132,9 @@ padding: calc(var(--spacing-regular)*2);
    background-color: var(--sub-body-color);
 
 }
-#current-forcast> .img{
+/* #current-forcast> .img{
     display: none;
-}
+} */
 #current-forcast > .heading{
     font-size: var(--font-large);
     /* font-weight:730; */
