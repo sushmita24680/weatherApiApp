@@ -6,9 +6,13 @@ const minTemp = (temp)=>{
     return Math.min(temp, 100);
 };
 
-// const getCities = async()=>{
 
-// }
+const getCitiesUsingGeolocation = async(searchText)=>{
+    
+    const res = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchText}&limit=5&appid=${APi_Key}&units=metric`)
+
+    return res.json();
+}
 
 const getData = async(city)=>{
     
@@ -73,23 +77,8 @@ const  loadHourlyForcast = (data)=>{
 }
 
 const fiveDaysForcast = (data) =>{
-    // console.log(data);
-    // data = data.slice(2, -1);
+   
     let dayWiseForecast = new Map();
-    
-    // for (let w in week_of_Days)
-    // {
-    //     dayWiseForecast.set(week_of_Days[w],[...data.filter(d =>{ 
-    //         if((new Date(d.dt_txt).getDay())=== +w)
-    //         {
-                
-    //             return d;
-    //         }
-        
-    //     })]);
-     
-
-    // }
 
     for(let d of data)
     {
@@ -169,8 +158,38 @@ const loadHumidity = ({main:{humidity}})=>{
     document.querySelector("#humidity p").innerHTML = `${humidity}%`;
 }
 
-document.addEventListener("DOMContentLoaded",async()=>{
+const debounce = ((func)=>{
+let timer;
+return (...args)=>{
+clearTimeout(timer);//clearing existing search
+timer = setTimeout(()=>{
+// console.log("debounce")
+func.apply(this,args);
+},500)
+}
+})
 
+
+const onsearchange = async(e)=>{
+    let {value} = e.target;
+    const listOfcites= await getCitiesUsingGeolocation(value);
+    let options =``;
+    
+    for (let { name, state, country, lat, lon } of listOfcites)
+    {
+    
+        console.log(name,state,country);
+
+        options += `<option data-city-details=${JSON.stringify({lat, lon ,name})} value="${name}${state},${country}"></option>`
+    }
+   document.querySelector("#cities").innerHTML=options;
+
+}
+
+const debounceSearch = debounce((event)=>onsearchange(event));
+
+document.addEventListener("DOMContentLoaded",async()=>{
+    document.querySelector("#input-cities").addEventListener('input',debounceSearch);
     // const city = await getCities();
     const city = "pune";
  const currentWeather = await getData(city);

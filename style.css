@@ -4,6 +4,7 @@
     margin: 0;
 }
 :root{
+--screen-width-ph:440px;
 --spacing-medium:8px;
 --spacing-regular:16px;
 --font-small:0.5rem;
@@ -23,7 +24,7 @@ body{
     margin: 0;
     font-family: Arial;
    background:rgba(2, 0, 3, 0.755);
-    width:650px;
+    width:var(--screen-width-ph);
    margin:auto;
 
 }
@@ -59,33 +60,29 @@ padding: calc(var(--spacing-regular)*2);
                          "d-f d-f"
                          "f-l h";
     gap:var(--spacing-regular);
-
+    
                         
 }
 #search{
     grid-area:sch;
-    padding: 2px 0px;
+    padding: 6px 0px;
     display: inline-block;
     background:#2d2a8197;
-    border-radius:6px;
     justify-content: space-around;
-    -webkit-border-radius:6px;
-    -moz-border-radius:6px;
-    -ms-border-radius:6px;
-    -o-border-radius:6px;
+    box-shadow: 1px 1px 2px 2px transparent;
 }
 #search > input{
     box-sizing: border-box;
-    font-size: calc(var(--font-large) + var(--font-small));
-    padding: 8px 42px;
-    border:4px solid #2d2a81e2;
-    border-radius: 8px;
+    font-size: calc(var(--font-large));
+    padding: 6px ;
+    width: calc(var(--screen-width-ph) - var(--font-xl)*1.3);
+    padding-inline:20px 20px ;
+    outline: none;
+    border: none;
+    border-radius: 6px;
     background-color: rgba(200, 204, 243, 0.711);
-    transition: content 0.5s ease;
-    -webkit-transition: content 0.5s ease;
-    -moz-transition: content 0.5s ease;
-    -ms-transition: content 0.5s ease;
-    -o-transition: content 0.5s ease;
+    
+
 }
 #search:focus-within::before{
     content: '◈';
@@ -95,14 +92,15 @@ padding: calc(var(--spacing-regular)*2);
 
 }
 #search>input:focus-within{
-    padding: 8px 16px;
-    color: rgb(0, 0, 0);
-    outline: none;
-    background: rgba(255, 255, 255, 0.873);
+    /* padding-inline:  6px; */
+    width: calc(var(--screen-width-ph) - var(--font-xl)*2);
+    background: rgba(255, 255, 255, 0.784);
 }
 #search:focus-within{
     background: #2d2a81;
+    border-radius:6px;
     box-shadow: 1px 1px 2px 2px rgba(6, 6, 96, 0.696);
+  
 }
 
 /*styles related to current weather app*/
